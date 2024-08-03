@@ -1,0 +1,10 @@
+{
+    "code-runner.executorMap": {
+        "cpp": "cd $dir  &&  g++ main.cpp -o lucid  &&  ./lucid"
+    },
+    "files.exclude": {
+        "lucid": true,
+        "LICENSE": true,
+        ".gitignore": true,
+    }
+}
