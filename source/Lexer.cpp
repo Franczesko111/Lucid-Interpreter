@@ -55,7 +55,9 @@ void NewToken(std::string &buffer, const TokenType bckp_type)
     }
     else type = bckp_type;
 
-    if(type != TokenType::NUMBER) buffer.clear();
+    type = SwitchTokenType(type);
+
+    if(SpecialToken(type)) buffer.clear();
     tokens.push_back( {.type = type, .value = buffer} );
 
     buffer.clear();
@@ -81,5 +83,26 @@ TokenType ParseBufferCh(const char ch)
         
         default:
             return TokenType::ERROR;
+    }
+}
+
+bool SpecialToken(const TokenType type)
+{
+    return !(type == TokenType::NUMBER ||
+            type == TokenType::VAR_NAME);
+}
+
+TokenType SwitchTokenType(TokenType type)
+{
+    uint16_t id = tokens.size();
+    printf("%i\n", id);
+    if(id < 1) return type;
+    switch(tokens[id-1].type)
+    {
+        case TokenType::VAR_INIT:
+            return TokenType::VAR_NAME; break;
+        
+        default:
+            return type;
     }
 }

@@ -39,6 +39,9 @@ int main()
             case TokenType::NUMBER:
                 printf("NUMBER"); break;
             
+            case TokenType::VAR_NAME:
+                printf("VAR_NAME"); break;
+            
             default:
                 printf("ERROR");
         }
