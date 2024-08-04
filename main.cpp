@@ -35,6 +35,9 @@ int main()
 
             case TokenType::SEMICOLON:
                 printf("SEMICOLON"); break;
+
+            case TokenType::NUMBER:
+                printf("NUMBER"); break;
             
             default:
                 printf("ERROR");

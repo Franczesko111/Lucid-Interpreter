@@ -7,6 +7,7 @@ enum class TokenType
     VAR_INIT,
     IF_OP,
     THEN_OP,
+    NUMBER,
 
     EQUALS,
     SEMICOLON,
@@ -23,6 +24,6 @@ struct Token
 inline std::vector<Token> tokens;
 
 std::vector<Token> Lexer(const std::string &source_code);
-void NewToken(std::string &buffer);
+void NewToken(std::string &buffer, const TokenType bckp_type = TokenType::ERROR);
 TokenType ParseBufferStr(const std::string &buffer);
 TokenType ParseBufferCh(const char ch);

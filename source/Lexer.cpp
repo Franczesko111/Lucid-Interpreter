@@ -26,6 +26,17 @@ std::vector<Token> Lexer(const std::string &source_code)
             continue;
         }
 
+        if(isdigit(let))
+        {
+            while(isdigit(let)) {
+                buffer += let;
+                let = source_code[++i];
+            }
+            i--;
+            NewToken(buffer, TokenType::NUMBER);
+            continue;
+        }
+
         buffer += let;
     }
     
@@ -34,10 +45,19 @@ std::vector<Token> Lexer(const std::string &source_code)
     return tokens;
 }
 
-void NewToken(std::string &buffer)
+void NewToken(std::string &buffer, const TokenType bckp_type)
 {
-    TokenType type = (buffer.size() > 1) ? ParseBufferStr(buffer) : ParseBufferCh(buffer[0]);
-    tokens.push_back( {.type = type} );
+    // Declaring the type
+    TokenType type;
+    if(bckp_type == TokenType::ERROR) {
+        if(buffer.size() > 1) type = ParseBufferStr(buffer);
+        else type = ParseBufferCh(buffer[0]);
+    }
+    else type = bckp_type;
+
+    if(type != TokenType::NUMBER) buffer.clear();
+    tokens.push_back( {.type = type, .value = buffer} );
+
     buffer.clear();
 }
 
