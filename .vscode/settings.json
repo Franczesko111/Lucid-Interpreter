@@ -1,10 +1,14 @@
 {
     "code-runner.executorMap": {
-        "cpp": "cd $dir  &&  g++ main.cpp source/*.cpp -std=c++20 -o lucid  &&  ./lucid"
+        "cpp": "cd $dir  &&  g++ main.cpp source/*.cpp -std=c++20 -g -o lucid  &&  ./lucid"
     },
     "files.exclude": {
         "lucid": true,
         "LICENSE": true,
         ".gitignore": true,
+        "*.dSYM": true
+    },
+    "files.associations": {
+        "vector": "cpp"
     }
 }
