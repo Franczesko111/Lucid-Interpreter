@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
-#include "source/Lexer.hpp"
+// Executor.hpp has Lexer.hpp inside
+#include "source/Executor.hpp"
 
 // Vector of tokens is global
 
@@ -50,6 +51,14 @@ int main()
             printf(": %s\n", token.value.c_str());
         else
             printf("\n");
+    }
+
+    printf("\n\nVariables:\n");
+
+    Execute();
+
+    for(Variable var: variables) {
+        printf("%s: %s\n", var.name.c_str(), var.value.c_str());
     }
 
     return 0;
