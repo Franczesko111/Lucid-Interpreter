@@ -43,6 +43,9 @@ int main()
             case TokenType::VAR_NAME:
                 printf("VAR_NAME"); break;
             
+            case TokenType::VAR_GET:
+                printf("VAR_GET"); break;
+            
             default:
                 printf("ERROR");
         }

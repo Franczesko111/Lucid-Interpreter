@@ -81,6 +81,9 @@ TokenType ParseBufferCh(const char ch)
         case ';':
             return TokenType::SEMICOLON; break;
         
+        case '$':
+            return TokenType::VAR_GET; break;
+        
         default:
             return TokenType::ERROR;
     }
@@ -99,6 +102,9 @@ TokenType SwitchTokenType(TokenType type)
     switch(tokens[id-1].type)
     {
         case TokenType::VAR_INIT:
+            return TokenType::VAR_NAME; break;
+
+        case TokenType::VAR_GET:
             return TokenType::VAR_NAME; break;
         
         default:

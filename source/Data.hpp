@@ -8,6 +8,7 @@ enum class TokenType
 {
     VAR_INIT,
     VAR_NAME,
+    VAR_GET,
     IF_OP,
     THEN_OP,
     NUMBER,
