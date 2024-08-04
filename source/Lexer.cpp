@@ -95,7 +95,6 @@ bool SpecialToken(const TokenType type)
 TokenType SwitchTokenType(TokenType type)
 {
     uint16_t id = tokens.size();
-    printf("%i\n", id);
     if(id < 1) return type;
     switch(tokens[id-1].type)
     {
