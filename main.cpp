@@ -30,6 +30,12 @@ int main()
             case TokenType::THEN_OP:
                 printf("THEN_OP"); break;
             
+            case TokenType::EQUALS:
+                printf("EQUALS"); break;
+
+            case TokenType::SEMICOLON:
+                printf("SEMICOLON"); break;
+            
             default:
                 printf("ERROR");
         }

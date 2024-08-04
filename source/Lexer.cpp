@@ -17,24 +17,49 @@ std::vector<Token> Lexer(const std::string &source_code)
             continue;
         }
 
+        if(ispunct(let))
+        {
+            if(buffer.size() > 0)
+                NewToken(buffer);
+            buffer = let;
+            NewToken(buffer);
+            continue;
+        }
+
         buffer += let;
     }
     
-    NewToken(buffer);
+    if(buffer.size() > 0)
+        NewToken(buffer);
     return tokens;
 }
 
 void NewToken(std::string &buffer)
 {
-    TokenType type = ParseBuffer(buffer);
+    TokenType type = (buffer.size() > 1) ? ParseBufferStr(buffer) : ParseBufferCh(buffer[0]);
     tokens.push_back( {.type = type} );
     buffer.clear();
 }
 
-TokenType ParseBuffer(const std::string &buffer)
+TokenType ParseBufferStr(const std::string &buffer)
 {
     if(buffer == "var") return TokenType::VAR_INIT;
     else if(buffer == "if") return TokenType::IF_OP;
     else if(buffer == "then") return TokenType::THEN_OP;
     else return TokenType::ERROR;
+}
+
+TokenType ParseBufferCh(const char ch)
+{
+    switch(ch)
+    {
+        case '=':
+            return TokenType::EQUALS; break;
+        
+        case ';':
+            return TokenType::SEMICOLON; break;
+        
+        default:
+            return TokenType::ERROR;
+    }
 }
