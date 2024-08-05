@@ -68,7 +68,7 @@ TokenType ParseBufferStr(const std::string &buffer)
     if(buffer == "var") return TokenType::VAR_INIT;
     else if(buffer == "if") return TokenType::IF_OP;
     else if(buffer == "then") return TokenType::THEN_OP;
-    else return TokenType::ERROR;
+    else return TokenType::VAR_NAME;
 }
 
 TokenType ParseBufferCh(const char ch)
