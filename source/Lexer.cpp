@@ -6,7 +6,7 @@ std::vector<Token> Lexer(const std::string &source_code)
     std::string buffer;
     char let;
 
-    for(uint16_t i = 0; i < source_code.size(); i++)
+    for(LUCID_LOOP_SIZE i = 0; i < source_code.size(); i++)
     {
         let = source_code[i];
 
@@ -92,7 +92,7 @@ bool SpecialToken(const TokenType type)
 
 TokenType SwitchTokenType(TokenType type)
 {
-    uint16_t id = tokens.size();
+    LUCID_LOOP_SIZE id = tokens.size();
     if(id < 1) return type;
     switch(tokens[id-1].type)
     {

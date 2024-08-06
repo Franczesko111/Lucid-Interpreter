@@ -4,7 +4,7 @@
 
 void Execute()
 {
-    for(uint16_t i = 0; i < tokens.size(); i++)
+    for(LUCID_LOOP_SIZE i = 0; i < tokens.size(); i++)
     {
         if(tokens[i].type == TokenType::SEMICOLON) continue;
 
@@ -30,7 +30,7 @@ void Execute()
     }
 }
 
-void f_InitVariable(uint16_t &i)
+void f_InitVariable(LUCID_LOOP_SIZE &i)
 {
     Variable var;
     var.name = tokens[++i].value;
@@ -42,9 +42,9 @@ void f_InitVariable(uint16_t &i)
     variables.push_back(var);
 }
 
-void f_GetSetVariable(uint16_t &i)
+void f_GetSetVariable(LUCID_LOOP_SIZE &i)
 {
-    uint16_t var_id;
+    LUCID_LOOP_SIZE var_id;
     bool var_error = false;
     i++;
     var_id = FindVariable(tokens[i].value);
@@ -59,14 +59,14 @@ void f_GetSetVariable(uint16_t &i)
         variables[var_id].value = tokens[++i].value;
 }
 
-void UpdateValue(std::string &var, uint16_t & i)
+void UpdateValue(std::string &var, LUCID_LOOP_SIZE & i)
 {
     var = tokens[++i].value;
 }
 
-uint16_t FindVariable(const std::string &var)
+LUCID_LOOP_SIZE FindVariable(const std::string &var)
 {
-    for(uint16_t i = 0; i < variables.size(); i++) {
+    for(LUCID_LOOP_SIZE i = 0; i < variables.size(); i++) {
         if(variables[i].name == var) {
             return i;
         }
