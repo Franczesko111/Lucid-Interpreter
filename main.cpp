@@ -1,5 +1,6 @@
-#include <fstream>
 #include <sstream>
+// Timer.hpp has the ffstream library inside
+#include "source/Timer.hpp"
 // Executor.hpp has Lexer.hpp inside
 #include "source/Executor.hpp"
 
