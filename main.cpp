@@ -76,6 +76,9 @@ void PrintTokens()
             
             case TokenType::DIVIDE_SYM:
                 printf("DIVIDE_SYM"); break;
+
+            case TokenType::AT_SYM:
+                printf("AT_SYM"); break;
             
             default:
                 printf("ERROR");

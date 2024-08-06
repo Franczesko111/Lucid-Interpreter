@@ -24,6 +24,9 @@ void Execute()
                     f_GetSetVariable(i);
             }
             break;
+
+            case TokenType::AT_SYM:
+                SpecialArguments(i); break;
             
             default: break;
         }
@@ -63,7 +66,7 @@ void UpdateValue(std::string &var, LUCID_LOOP_SIZE &i)
 {
     LUCID_DATA_SIZE temp_1 = 0, temp_2 = 0;
     std::string result;
-    bool second_math = false;
+    bool second_math = special_arguments[SpecialArgs::FAST_MATH];
     bool special_math = false;
     i++;
 
@@ -147,6 +150,11 @@ bool MathLoop(TokenType type)
         case TokenType::DIVIDE_SYM: return true;
         default: return false;
     }
+}
+
+void SpecialArguments(LUCID_LOOP_SIZE &i)
+{
+    if(tokens[++i].value == "fast_math") special_arguments[0] = true;
 }
 
 LUCID_DATA_SIZE MathAdd(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a + b; }

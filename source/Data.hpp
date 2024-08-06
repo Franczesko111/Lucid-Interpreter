@@ -22,6 +22,7 @@ enum class TokenType
 
     EQUALS,
     SEMICOLON,
+    AT_SYM,
 
     ERROR
 };
@@ -35,7 +36,7 @@ struct Token
 inline std::vector<Token> tokens;
 
 
-//Variables
+// Variables
 struct Variable
 {
     std::string name;
@@ -43,3 +44,12 @@ struct Variable
 };
 
 inline std::vector<Variable> variables;
+
+
+// Special arguments
+enum SpecialArgs
+{
+    FAST_MATH
+};
+
+inline bool special_arguments[1] = {false};

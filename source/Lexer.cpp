@@ -17,7 +17,7 @@ std::vector<Token> Lexer(const std::string &source_code)
             continue;
         }
 
-        if(ispunct(let))
+        if(ispunct(let) && let != '_')
         {
             if(buffer.size() > 0)
                 NewToken(buffer);
@@ -82,6 +82,7 @@ TokenType ParseBufferCh(const char ch)
         case '-': return TokenType::MINUS_SYM; break;
         case '*': return TokenType::MULTIPLY_SYM; break;
         case '/': return TokenType::DIVIDE_SYM; break;
+        case '@': return TokenType::AT_SYM; break;
         default:  return TokenType::ERROR;
     }
 }
