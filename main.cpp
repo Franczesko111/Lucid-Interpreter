@@ -5,6 +5,8 @@
 
 // Vector of tokens is global
 
+void PrintTokens();
+
 int main()
 {
     std::string source_code;
@@ -18,6 +20,22 @@ int main()
     printf("%s\n\n", source_code.c_str());
     Lexer(source_code);
 
+    PrintTokens();
+    printf("\n\n");
+    Execute();
+    PrintTokens();
+
+    printf("\n\nVariables:\n");
+
+    for(Variable var: variables) {
+        printf("%s: %s\n", var.name.c_str(), var.value.c_str());
+    }
+
+    return 0;
+}
+
+void PrintTokens()
+{
     for(Token token: tokens)
     {
         switch(token.type)
@@ -61,14 +79,4 @@ int main()
         else
             printf("\n");
     }
-
-    printf("\n\nVariables:\n");
-
-    Execute();
-
-    for(Variable var: variables) {
-        printf("%s: %s\n", var.name.c_str(), var.value.c_str());
-    }
-
-    return 0;
 }

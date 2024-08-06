@@ -3,7 +3,7 @@
 #include <string>
 
 typedef uint16_t LUCID_LOOP_SIZE;
-typedef uint16_t LUCID_DATA_SIZE;
+typedef int16_t LUCID_DATA_SIZE;
 
 // Tokens
 enum class TokenType

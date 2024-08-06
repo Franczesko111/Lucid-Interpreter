@@ -35,7 +35,7 @@ void f_InitVariable(LUCID_LOOP_SIZE &i)
     Variable var;
     var.name = tokens[++i].value;
     if(tokens[++i].type == TokenType::EQUALS)
-        UpdateValue(var.name, i);
+        UpdateValue(var.value, i);
     else
         i--;
 
@@ -56,12 +56,37 @@ void f_GetSetVariable(LUCID_LOOP_SIZE &i)
     }
 
     if(tokens[++i].type == TokenType::EQUALS)
-        variables[var_id].value = tokens[++i].value;
+        UpdateValue(variables[var_id].value, i);
 }
 
-void UpdateValue(std::string &var, LUCID_LOOP_SIZE & i)
+void UpdateValue(std::string &var, LUCID_LOOP_SIZE &i)
 {
-    var = tokens[++i].value;
+    LUCID_DATA_SIZE temp_1 = 0, temp_2 = 0;
+    std::string result;
+    i++;
+
+    while(i < tokens.size() && (tokens[i].type == TokenType::NUMBER || tokens[i].type == TokenType::PLUS_SYM || tokens[i].type == TokenType::MINUS_SYM))
+    {
+        switch(tokens[i].type)
+        {
+            case TokenType::NUMBER: break;
+
+            case TokenType::PLUS_SYM: {
+                MathUpdateTokens(i, MathAdd);
+                i--;
+            } break;
+
+            case TokenType::MINUS_SYM: {
+                MathUpdateTokens(i, MathSubtract);
+                i--;
+            } break;
+
+            default: break;
+        }
+        i++;
+    }
+
+    var = tokens[--i].value;
 }
 
 LUCID_LOOP_SIZE FindVariable(const std::string &var)
@@ -73,3 +98,15 @@ LUCID_LOOP_SIZE FindVariable(const std::string &var)
     }
     return UINT16_MAX;
 }
+
+void MathUpdateTokens(const LUCID_LOOP_SIZE i, LUCID_DATA_SIZE(*func)(LUCID_DATA_SIZE, LUCID_DATA_SIZE))
+{
+    LUCID_DATA_SIZE temp_1 = stoi(tokens[i-1].value);
+    LUCID_DATA_SIZE temp_2 = stoi(tokens[i+1].value);
+    tokens[i-1] = { .type = TokenType::NUMBER, .value = std::to_string(func(temp_1, temp_2)) };
+    tokens.erase(tokens.begin()+i);
+    tokens.erase(tokens.begin()+i);
+}
+
+LUCID_DATA_SIZE MathAdd(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a + b; }
+LUCID_DATA_SIZE MathSubtract(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a - b; }
