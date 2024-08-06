@@ -70,6 +70,12 @@ void PrintTokens()
             case TokenType::MINUS_SYM:
                 printf("MINUS_SYM"); break;
             
+            case TokenType::MULTIPLY_SYM:
+                printf("MULTIPLY_SYM"); break;
+            
+            case TokenType::DIVIDE_SYM:
+                printf("DIVIDE_SYM"); break;
+            
             default:
                 printf("ERROR");
         }

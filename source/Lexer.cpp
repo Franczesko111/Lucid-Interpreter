@@ -50,7 +50,7 @@ void NewToken(std::string &buffer, const TokenType bckp_type)
     // Declaring the type
     TokenType type;
     if(bckp_type == TokenType::ERROR) {
-        if(buffer.size() > 1) type = ParseBufferStr(buffer);
+        if(buffer.size() > 1 || (buffer.size() == 1 && !ispunct(buffer[0]))) type = ParseBufferStr(buffer);
         else type = ParseBufferCh(buffer[0]);
     }
     else type = bckp_type;
@@ -80,6 +80,8 @@ TokenType ParseBufferCh(const char ch)
         case '$': return TokenType::VAR_GET; break;
         case '+': return TokenType::PLUS_SYM; break;
         case '-': return TokenType::MINUS_SYM; break;
+        case '*': return TokenType::MULTIPLY_SYM; break;
+        case '/': return TokenType::DIVIDE_SYM; break;
         default:  return TokenType::ERROR;
     }
 }

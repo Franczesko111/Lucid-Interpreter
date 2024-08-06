@@ -14,8 +14,11 @@ enum class TokenType
     IF_OP,
     THEN_OP,
     NUMBER,
+
     PLUS_SYM,
     MINUS_SYM,
+    MULTIPLY_SYM,
+    DIVIDE_SYM,
 
     EQUALS,
     SEMICOLON,

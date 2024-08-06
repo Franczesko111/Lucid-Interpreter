@@ -65,7 +65,7 @@ void UpdateValue(std::string &var, LUCID_LOOP_SIZE &i)
     std::string result;
     i++;
 
-    while(i < tokens.size() && (tokens[i].type == TokenType::NUMBER || tokens[i].type == TokenType::PLUS_SYM || tokens[i].type == TokenType::MINUS_SYM))
+    while(i < tokens.size() && MathLoop(tokens[i].type))
     {
         switch(tokens[i].type)
         {
@@ -78,6 +78,16 @@ void UpdateValue(std::string &var, LUCID_LOOP_SIZE &i)
 
             case TokenType::MINUS_SYM: {
                 MathUpdateTokens(i, MathSubtract);
+                i--;
+            } break;
+
+            case TokenType::MULTIPLY_SYM: {
+                MathUpdateTokens(i, MathMultiply);
+                i--;
+            } break;
+
+            case TokenType::DIVIDE_SYM: {
+                MathUpdateTokens(i, MathDivide);
                 i--;
             } break;
 
@@ -108,5 +118,20 @@ void MathUpdateTokens(const LUCID_LOOP_SIZE i, LUCID_DATA_SIZE(*func)(LUCID_DATA
     tokens.erase(tokens.begin()+i);
 }
 
+bool MathLoop(TokenType type)
+{
+    switch(type)
+    {
+        case TokenType::NUMBER: return true;
+        case TokenType::PLUS_SYM: return true;
+        case TokenType::MINUS_SYM: return true;
+        case TokenType::MULTIPLY_SYM: return true;
+        case TokenType::DIVIDE_SYM: return true;
+        default: return false;
+    }
+}
+
 LUCID_DATA_SIZE MathAdd(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a + b; }
 LUCID_DATA_SIZE MathSubtract(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a - b; }
+LUCID_DATA_SIZE MathMultiply(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a * b; }
+LUCID_DATA_SIZE MathDivide(LUCID_DATA_SIZE a, LUCID_DATA_SIZE b) { return a / b; }
