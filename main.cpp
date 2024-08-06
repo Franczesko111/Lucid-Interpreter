@@ -45,6 +45,12 @@ int main()
             
             case TokenType::VAR_GET:
                 printf("VAR_GET"); break;
+
+            case TokenType::PLUS_SYM:
+                printf("PLUS_SYM"); break;
+            
+            case TokenType::MINUS_SYM:
+                printf("MINUS_SYM"); break;
             
             default:
                 printf("ERROR");

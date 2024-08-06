@@ -75,17 +75,12 @@ TokenType ParseBufferCh(const char ch)
 {
     switch(ch)
     {
-        case '=':
-            return TokenType::EQUALS; break;
-        
-        case ';':
-            return TokenType::SEMICOLON; break;
-        
-        case '$':
-            return TokenType::VAR_GET; break;
-        
-        default:
-            return TokenType::ERROR;
+        case '=': return TokenType::EQUALS; break;
+        case ';': return TokenType::SEMICOLON; break;
+        case '$': return TokenType::VAR_GET; break;
+        case '+': return TokenType::PLUS_SYM; break;
+        case '-': return TokenType::MINUS_SYM; break;
+        default:  return TokenType::ERROR;
     }
 }
 

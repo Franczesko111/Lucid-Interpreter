@@ -35,7 +35,9 @@ void f_InitVariable(uint16_t &i)
     Variable var;
     var.name = tokens[++i].value;
     if(tokens[++i].type == TokenType::EQUALS)
-        var.value = tokens[++i].value;
+        UpdateValue(var.name, i);
+    else
+        i--;
 
     variables.push_back(var);
 }
@@ -55,6 +57,11 @@ void f_GetSetVariable(uint16_t &i)
 
     if(tokens[++i].type == TokenType::EQUALS)
         variables[var_id].value = tokens[++i].value;
+}
+
+void UpdateValue(std::string &var, uint16_t & i)
+{
+    var = tokens[++i].value;
 }
 
 uint16_t FindVariable(const std::string &var)
