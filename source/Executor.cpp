@@ -63,37 +63,55 @@ void UpdateValue(std::string &var, LUCID_LOOP_SIZE &i)
 {
     LUCID_DATA_SIZE temp_1 = 0, temp_2 = 0;
     std::string result;
+    bool second_math = false;
+    bool special_math = false;
     i++;
 
+    LUCID_LOOP_SIZE og_i = i;
+
+    // goto function
+    second_round:
     while(i < tokens.size() && MathLoop(tokens[i].type))
     {
         switch(tokens[i].type)
         {
             case TokenType::NUMBER: break;
-
+            
             case TokenType::PLUS_SYM: {
-                MathUpdateTokens(i, MathAdd);
-                i--;
+                if(second_math) {
+                    MathUpdateTokens(i, MathAdd);
+                    i--;
+                }
             } break;
 
             case TokenType::MINUS_SYM: {
-                MathUpdateTokens(i, MathSubtract);
-                i--;
+                if(second_math) {
+                    MathUpdateTokens(i, MathSubtract);
+                    i--;
+                }
             } break;
 
             case TokenType::MULTIPLY_SYM: {
                 MathUpdateTokens(i, MathMultiply);
+                special_math = true;
                 i--;
             } break;
 
             case TokenType::DIVIDE_SYM: {
                 MathUpdateTokens(i, MathDivide);
+                special_math = true;
                 i--;
             } break;
 
             default: break;
         }
         i++;
+    }
+
+    if(special_math && second_math == false) {
+        second_math = true;
+        i = og_i;
+        goto second_round;
     }
 
     var = tokens[--i].value;
